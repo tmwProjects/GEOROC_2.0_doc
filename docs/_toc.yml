@@ -1,0 +1,21 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: introduction
+- file: GEOROC_API
+- file: access_data
+  sections:
+    - file: writing_query
+    - file: api_response
+    - file: data_extraction
+- file: future_features
+- file: contribute
+- file: projects
+  sections:
+  - file: example1_notebook
+  - file: example2_notebook
+
+
