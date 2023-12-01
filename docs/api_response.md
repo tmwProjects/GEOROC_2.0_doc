@@ -13,7 +13,7 @@ range of 500 to 599 indicate server errors.
 ## Headers: 
 
 The headers contain meta-information about the response, such as the content type (usually application/json for 
-JSON data) and possibly additional pagination or authenti cation information.
+JSON data) and possibly additional pagination or authentication information.
 
 ## Data: 
 
@@ -455,54 +455,55 @@ pre-written Python code:
 }
 ```
 
-### Hier ist eine Beschreibung der wichtigsten Elemente und ihrer Bedeutung:
+### Here is a description of the most important elements and their meaning:
 
-**numItems**: Die Anzahl der in der Antwort enthaltenen Elemente. In diesem Fall gibt es nur ein Element.
+**numItems**: The number of items contained in the response. In this case, there is only one element.
 
-**data**: Eine Liste, die die eigentlichen Daten enthält. Jedes Element in dieser Liste repräsentiert eine einzelne Probe.
+**data**: A list containing the actual data. Each element in this list represents a single sample.
 
-**sampleNum**: Die eindeutige Nummer der Probe.
+**sampleNum**: The unique number of the sample.
 
-**uniqueID**: Eine einzigartige Identifikationsnummer für die Probe, die hier jedoch leer ist.
+**uniqueID**: A unique identification number for the sample, but empty here.
 
-**batches**: Eine Liste von Batch-Nummern, die mit der Probe verbunden sind.
+**batches**: A list of batch numbers associated with the sample.
 
-**references**: Eine Liste von Referenzen, die Informationen über die Quellen enthalten, die sich auf die Probe beziehen.
+**references**: A list of references containing information about the sources related to the sample.
 
-**authors**: Eine Liste von Autoren, die an den Studien oder Veröffentlichungen zu dieser Probe beteiligt waren.
+**authors**: A list of authors involved in the studies or publications related to this sample.
 
-**reference**: Enthält Details wie DOI, Zeitschriftentitel, Seitenzahl, Referenznummer, Titel der Studie und Veröffentlichungsjahr.
+**reference**: Contains details such as DOI, journal title, page number, reference number, title of the study and year of publication.
 
-**sampleid**: Die ID, die mit dem Sampling-Feature verbunden ist.
+**sampleid**: The ID associated with the sampling feature.
 
-**sampleName**: Der Name der Probe.
+**sampleName**: The name of the sample.
 
-**locationNames**: Eine Liste von geografischen Namen, die mit der Probe verbunden sind.
+**locationNames**: A list of geographic names associated with the sample.
 
-**locationTypes**: Die Art der geografischen Orte, zugeordnet zu den locationNames.
+**locationTypes**: The type of geographic locations associated with the locationNames.
 
-**elevationMin und elevationMax**: Die minimale und maximale Höhe der Probenentnahmeorte.
+**elevationMin and elevationMax**: The minimum and maximum elevation of the sampling locations.
 
-**landOrSea**: Kennzeichnet, ob die Probe vom Land oder aus dem Meer stammt.
+**landOrSea**: Indicates whether the sample is from land or sea.
 
-**rockTypes, rockClasses, rockTextures**: Informationen über den Gesteinstyp, die Gesteinsklasse und die Gesteinstextur.
+**rockTypes, rockClasses, rockTextures**: Information about the rock type, rock class and rock texture.
 
-**ageMin und ageMax**: Das minimale und maximale Alter der Probe.
+**ageMin and ageMax**: The minimum and maximum age of the sample.
 
-**materials, minerals, inclusionTypes**: Listen von Materialien, Mineralien und Einschlusstypen, die in der Probe gefunden wurden.
+**materials, minerals, inclusionTypes**: Lists of materials, minerals and inclusion types found in the sample.
 
-**locationNum**: Eine Nummer, die den geografischen Ort der Probe kennzeichnet.
+**locationNum**: A number that identifies the geographic location of the sample.
 
-**latitude, longitude, latitudeMin, latitudeMax, longitudeMin, longitudeMax**: Geografische Koordinaten der Probe.
+**latitude, longitude, latitudeMin, latitudeMax, longitudeMin, longitudeMax**: Geographical coordinates of the sample.
 
-**tectonicSetting**: Die tektonische Einstellung des Probenstandortes.
+**tectonicSetting**: The tectonic setting of the sample location.
 
-**method**: Die Methoden, die zur Analyse der Probe verwendet wurden.
+**method**: The methods used to analyse the sample.
 
-**comment**: Kommentare oder zusätzliche Anmerkungen zur Probe.
+**comment**: Comments or additional notes about the sample.
 
-**institutions**: Die Institutionen, die mit der Analyse der Probe verbunden sind.
+**institutions**: The institutions associated with the analysis of the sample.
 
-**itemName, itemGroup, standardNames, standardValues, values, units**: Detaillierte chemische Analyseergebnisse der Probe, einschließlich der Namen der gemessenen Elemente, ihrer Gruppierungen, Standardnamen und -werte, der gemessenen Werte und der Einheiten dieser Werte.
+**itemName, itemGroup, standardNames, standardValues, values, units**: Detailed chemical analysis results of the sample, including the names of the measured items, their groupings, standard names and values, the measured values and the units of these values.
 
-Diese Datenstruktur liefert eine umfassende Übersicht über die Probe, einschließlich ihrer geografischen, geologischen und chemischen Eigenschaften sowie der zugehörigen wissenschaftlichen Literatur.
+This data structure provides a comprehensive overview of the sample, including its geographical, geological and chemical 
+properties as well as the associated scientific literature.

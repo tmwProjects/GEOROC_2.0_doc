@@ -2,8 +2,9 @@
 
 ## Extract the SampleID from the Response body
 
-To do this, you can use the filtered_samples_combined variable that contains the response body of the API call. Since 
-the API response is a list of objects, you can extract the SampleID from the first object in the list:
+In the context of the topic discussed in the previous chapter, it is necessary to transform the response body into an 
+adequate list structure. This step is essential to ensure an efficient query at the 'fulldata' endpoint. The function 
+specified below is intended to help realise this process:
 
 ```python
 def extract_sample_ids(filtered_samples):
@@ -18,7 +19,14 @@ Output:
 [495504]
 ```
 
+In our minimum example, we had set the limit to 1, which meant that only one SampleID could be extracted.
+
 ***
+
+## Obtain data using the SampleIDs
+
+For example, in order to obtain certain measurement data for a specific sample or setting, we need another function 
+that returns the data for the corresponding SampleID(s) in JSON format.
 
 ```python
 def get_measurement_data(sample_ids):
@@ -36,11 +44,10 @@ def get_measurement_data(sample_ids):
 sample_ids = extract_sample_ids(filtered_samples_combined)
 measurement_data = get_measurement_data(sample_ids)
 
-# Optional: Ausgabe der Daten für jede SampleID
+# Optional: Output of the data for each SampleID
 for data in measurement_data:
     print(json.dumps(data, indent=4))
 ```
-
 
 ```Bash
 Output:
@@ -474,3 +481,22 @@ Output:
     ]
 }
 ```
+
+A large amount of potentially relevant data can be identified by analysing the response body in JSON format. This data 
+structure is particularly important in the context of web-based applications, such as online databases for scientific 
+publications. The JSON format is characterised here by its seamless integration and user-friendliness.
+
+In addition, numerous contemporary programming languages and data analysis tools support the reading and writing of 
+JSON data. This support significantly simplifies the processing of information, for example geochemical measurement data.
+
+With regard to the specific requirements of the analysis and visualisation of such geochemical data, conversion into 
+formats such as CSV or Excel can be advantageous. These formats are particularly useful if the intention is to analyse 
+or manually check the data in spreadsheet software.
+
+In the case that a detailed analysis and visualisation of the measurement data in a specific context is intended, the 
+CSV format proves to be a viable alternative. For efficient data manipulation and analysis, it would be advisable to 
+restructure the response body accordingly to ensure smooth compatibility with the relevant analysis libraries.
+
+***
+
+## CSV restructuring for measurement data analysis

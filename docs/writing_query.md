@@ -1,7 +1,18 @@
 # Writing simple API query
 
 
-You should import the relevant modules into your Python document:
+
+In Python programmes, import instructions are usually at the beginning of the code. They integrate external modules or 
+libraries that provide additional functionalities. These imports have the following meanings:
+
+**import requests**: Includes the requests module, which is used for sending HTTP requests to web servers. It is particularly 
+useful for interacting with web APIs.
+
+**import json**: Adds the json module, which provides functions for processing JSON data. It enables the parsing of JSON 
+strings into Python objects and vice versa.
+
+**import sys**: Integrates the sys module, which provides functions for interacting with the Python interpreter, such as 
+terminating a script with a specific exit code.
 
 ```python
 import requests
@@ -9,7 +20,17 @@ import json
 import sys
 ```
 
-Define your API key, base URL and headers for the API request:
+The first part of the code defines basic elements for the API interaction:
+
+API key (api_key): This is a string that is used for authentication with the API. It ensures that only authorised users 
+have access to the API.
+
+Base URL (base_url): It defines the basic address of the API. All endpoint calls are formulated relative to this base URL.
+
+Header (headers): A dictionary containing the necessary HTTP headers for the requests, including accepting JSON formats 
+and including the API key.
+
+This initialisation creates the basis for subsequent communication with the API and ensures secure and standardised interaction.
 
 ```python
 api_key = "your_api_key_here"
@@ -22,7 +43,22 @@ headers = {
 }
 ```
 
-Create a function to perform API queries for different endpoints:
+The second part of the code contains the api_query function:
+
+Purpose: This function is designed to send GET requests to various endpoints of the API and process the responses.
+
+Parameters:
+
+endpoint: Specifies the specific endpoint of the API to which the request is sent.
+
+params (optional): Contains additional parameters for the request.
+
+Processing logic: The function uses the requests library to execute the GET request. It checks the status code of the 
+response: If the status code is 200, the response is interpreted as JSON and returned; if the status code is not 200, 
+an error message is issued and None is returned.
+
+The api_query function thus demonstrates an efficient and structured approach to performing and handling API requests in 
+Python. It emphasises the importance of error handling and provides a user-friendly method for interacting with web APIs.
 
 ```python
 def api_query(endpoint, params=None):
@@ -46,14 +82,17 @@ API query successful for endpoint:ping
 +---------------------------------------------------------------------+
 ```
 
-Die Funktion check_api_connection() dient dazu, die Verbindung zu einem API-Server zu überprüfen. Sie ruft den 
-ping-Endpunkt der API auf und prüft, ob eine Antwort erhalten wird.
+The check_api_connection() function is designed to validate connectivity with an API server. This function initiates a 
+call to the ping endpoint of the relevant API and checks the response to confirm the availability of the server.
 
-Bei erfolgreicher Verbindung zur API zeigt sie eine Erfolgsmeldung an.
-Scheitert die Verbindung, gibt sie eine Fehlermeldung aus und beendet das Programm mit sys.exit(1), was einen 
-Fehlerzustand signalisiert. Diese Funktion ist besonders nützlich, um zu Beginn eines Skripts sicherzustellen, dass die 
-API erreichbar ist, bevor weitere API-bezogene Operationen durchgeführt werden. Es ist eine Art von Initialcheck, um zu 
-vermeiden, dass weitere Teile des Skripts ausgeführt werden, wenn keine Verbindung zur API besteht.
+In the event of a successful connection, the function generates a confirmation message indicating the successful 
+establishment of the connection. In the opposite scenario, if the connection fails, the function triggers an error 
+message and terminates the executing programme using sys.exit(1). This specific action communicates an error status.
+
+The particular relevance of this function lies in its ability to check the accessibility of the API at the beginning of 
+the execution of a script. This so-called initial check is essential to ensure that subsequent, API-dependent operations 
+of the script are not initiated if the API is not available. This procedure helps to avoid unnecessary execution of 
+script parts that would be doomed to failure without an established API connection.
 
 ```python
 def check_api_connection():
@@ -78,32 +117,35 @@ Connection to API server successful!
 +---------------------------------------------------------------------+
 ```
 
-Die Funktion get_filtered_samples() ist dafür konzipiert, gefilterte Daten von einer API basierend auf einer Vielzahl 
-von Parametern abzurufen. Sie ermöglicht es, spezifische Abfragen an die API zu senden, indem verschiedene Filterkriterien 
-festgelegt werden, wie etwa geografische Lage, Gesteinstypen, Veröffentlichungsdaten und mehr. 
+The get_filtered_samples() function is designed to retrieve filtered data from an API based on a number of parameters. 
+of parameters. It allows specific queries to be sent to the API by defining various filter criteria such as geographic location 
+filter criteria, such as geographic location, rock types, publication dates and more.
 
-##### Hier ist eine kurze Übersicht:
+##### Here is a short overview:
 
-Parameter der Funktion:
+Parameters of the function:
 
-Die Funktion akzeptiert eine breite Palette von Parametern (z.B. limit, offset, rocktype, agemin, etc.), die es dem Benutzer 
-ermöglichen, die Abfrage zu spezifizieren. Jeder Parameter entspricht einem möglichen Filterkriterium in der API-Abfrage.
+The function accepts a wide range of parameters (e.g. limit, offset, rocktype, agemin, etc.) that allow the user to specify the query. 
+to specify the query. Each parameter corresponds to a possible filter criterion in the API query.
 
-Aufbau der Abfrage:
 
-Die Funktion erstellt eine Abfrage, indem sie die übergebenen Parameter in ein Dictionary (filters) umwandelt. Dabei 
-werden nur die Parameter berücksichtigt, die nicht None sind, um sicherzustellen, dass nur relevante Filter an die API 
-gesendet werden.
+Structure of the query:
 
-API-Aufruf:
+The function creates a query by converting the transferred parameters into a dictionary (filters). In doing so 
+parameters that are not None are taken into account to ensure that only relevant filters are sent to the API. 
+are sent to the API.
 
-Die Funktion ruft dann die api_query Funktion auf, übergibt ihr den Endpunkt (queries/samples) und die erstellten Filter 
-als Parameter. Diese Funktionsweise ermöglicht es, dynamisch Daten basierend auf den übergebenen Filterkriterien abzurufen.
 
-Rückgabe der Daten:
+API call:
 
-Schließlich gibt die Funktion die von der API zurückgegebenen Daten zurück. Diese Daten entsprechen den gesetzten 
-Filterkriterien und können für weitere Analysen oder Verarbeitungen verwendet werden. 
+The function then calls the api_query function, passes it the endpoint (queries/samples) and the created filters 
+as parameters. This functionality makes it possible to dynamically retrieve data based on the passed filter criteria.
+
+
+Returning the data:
+
+Finally, the function returns the data returned by the API. This data corresponds to the set 
+filter criteria and can be used for further analyses or processing.
 
 ```python
 def get_filtered_samples(
@@ -155,28 +197,33 @@ API query successful for endpoint:queries/samples
 +---------------------------------------------------------------------+
 ```
 
-#### Nutzung der get_filtered_samples() Funktion
+#### Using the get_filtered_samples() function
 
-Um die get_filtered_samples() Funktion effektiv zu nutzen, folgen Sie diesen Schritten, die anhand eines konkreten 
-Beispiels illustriert werden:
+To use the get_filtered_samples() function effectively, follow these steps, which are illustrated using a concrete example. 
+illustrated using a concrete example:
 
-1. Aufrufen der Funktion mit spezifischen Parametern:
+1. call the function with specific parameters:
 
-Verwenden Sie limit="1", um die Anzahl der zurückgegebenen Datensätze auf einen zu beschränken.
-Setzen Sie location1, location2 und location3, um geografische Orte festzulegen.
-Bestimmen Sie mit rocktype="PLU" den Gesteinstyp, der in der Abfrage gefiltert werden soll.
+Use limit="1" to limit the number of records returned to one.
+Set location1, location2 and location3 to specify geographical locations.
+Use rocktype="PLU" to specify the rock type to be filtered in the query.
 
-2. Erwartungen an die Funktion:
+2. expectations of the function:
 
-Die Funktion zielt darauf ab, Daten abzurufen, die genau den gesetzten Filterkriterien entsprechen.
-Dies beinhaltet die Filterung nach spezifischen tektonischen Zonen, geografischen Orten und Gesteinstypen.
+The function aims to retrieve data that exactly matches the set filter criteria.
+This includes filtering by specific tectonic zones, geographic locations and rock types.
 
-3. Interpretation des Outputs:
+3. interpretation of the output:
 
-Nach dem Aufruf erhalten Sie eine Ausgabe wie folgt:
-numItems: Zeigt die Anzahl der Datensätze an, die tatsächlich zurückgegeben wurden.
-totalCount: Gibt die Gesamtzahl der Datensätze an, die den Filterkriterien entsprechen.
-data: Eine Liste der gefilterten Daten, die spezifische Informationen über jede Probe enthält, wie sampleID und geografische Koordinaten (latitude und longitude).
+After the call you will receive an output as follows:
+
+numItems: Displays the number of records that were actually returned.
+
+totalCount: Indicates the total number of data records that match the filter criteria.
+
+data: A list of the filtered data containing specific information about each sample, such as sampleID and geographic 
+
+coordinates (latitude and longitude).
 
 ```python
 filtered_samples_combined = get_filtered_samples(
@@ -185,7 +232,7 @@ filtered_samples_combined = get_filtered_samples(
     location2="BANGLADESH",
     location3="MADDHAPARA; INDIA",
     rocktype="PLU"
-    # Fügen Sie bei Bedarf weitere Parameter hinzu
+    # Add further parameters if required
 )
 
 print(filtered_samples_combined)
@@ -209,53 +256,55 @@ Die Filter DSL (Domain-Specific Language) Syntax für die get_filtered_samples F
 flexible und leistungsstarke Art, Daten abzufragen. Hier ist eine detaillierte Beschreibung, wie Sie diese Syntax im 
 Zusammenhang mit den Parametern nutzen können:
 
-#### Grundkonzept
+#### Basic concept
 
 **Syntax**: FIELD=OPERATOR:VALUE
 
-**FIELD**: Ein Feld ist einer der akzeptierten Abfrageparameter. Dies könnte ein beliebiger Parameter sein, wie location1, agemin, rocktype etc.
+**FIELD**: A field is one of the accepted query parameters. This could be any parameter, such as location1, agemin, rocktype etc.
 
-**OPERATOR**: Ein Operator definiert die Art der Abfrage. Verschiedene Operatoren sind verfügbar:
+**OPERATOR**: An operator defines the type of query. Various operators are available:
 
-* "lt" (kleiner als, <)
-* "gt" (größer als, >)
-* "eq" (gleich, =)
-* "in" (innerhalb einer Liste)
-* "lk" (ähnlich, LIKE in SQL)
-* "btw" (zwischen, BETWEEN in SQL)
+* "lt" (less than, <)
+* "gt" (greater than, >)
+* "eq" (equal to, =)
+* "in" (within a list)
+* "lk" (similar, LIKE in SQL)
+* "btw" (between, BETWEEN in SQL)
 
-**VALUE**: Der Wert, gegen den das Feld verglichen wird. Dies kann eine unzitierte Zeichenkette, eine Ganzzahl oder eine Dezimalzahl sein.
+**VALUE**: The value against which the field is compared. This can be an unquoted string, an integer or a decimal number.
 
-##### Operatoren und ihre Nutzung
+##### Operators and their use
 
-"lt" und "gt":
-Anwendbar nur auf numerische Werte.
-Beispiel: agemin=lt:100 (Alter kleiner als 100)
+"lt" and "gt":
+Only applicable to numerical values.
+Example: agemin=lt:100 (age less than 100)
 
 "eq":
-Standardoperator, wenn kein anderer angegeben ist.
-Kann für jeden Wertetyp verwendet werden.
-Beispiel: rocktype=eq:Basalt (Rocktype gleich Basalt)
+Standard operator if no other is specified.
+Can be used for any value type.
+Example: rocktype=eq:Basalt (Rocktype equals Basalt)
 
 "in":
-Zum Filtern innerhalb einer Liste von Werten.
-Die Werte müssen durch Kommas getrennt sein.
-Beispiel: location1=in:USA,Canada,Mexico (Location1 in einer der angegebenen Regionen)
+For filtering within a list of values.
+The values must be separated by commas.
+Example: location1=in:USA,Canada,Mexico (Location1 in one of the specified regions)
 
 "lk":
-Nur für Zeichenketten.
-Unterstützt Wildcards * (für beliebig viele Zeichen) und ? (für ein einzelnes Zeichen).
-Beispiel: title=lk:Geology* (Titel beginnt mit "Geology")
+Only for character strings.
+Supports wildcards * (for any number of characters) and ? (for a single character).
+Example: title=lk:Geology* (title begins with "Geology")
 
 "btw":
-Für numerische Bereiche.
-Nimmt zwei durch Kommas getrennte Werte an.
-Wenn ein Wert fehlt, wird standardmäßig 0 oder 9999999 angenommen.
-Beispiel: agemin=btw:100,200 (Alter zwischen 100 und 200)
-Beispiele für die Verwendung
+For numeric ranges.
+Takes two values separated by commas.
+If a value is missing, 0 or 9999999 is assumed by default.
+Example: agemin=btw:100,200 (age between 100 and 200)
 
-Angenommen, Sie möchten Proben finden, die aus einer bestimmten Region stammen, ein bestimmtes Alter haben und einer 
-bestimmten Gesteinsart entsprechen. Sie könnten dann folgende Filter verwenden:
+
+###### Example of use
+
+Suppose you want to find samples that come from a certain region, are of a certain age and correspond to a certain type of rock. 
+age and correspond to a certain type of rock. You could then use the following filters:
 
 ```python
 filtered_samples_combined = get_filtered_samples(
@@ -265,13 +314,11 @@ filtered_samples_combined = get_filtered_samples(
 )
 ```
 
-> **Hinweise**:
+> **Notes**:
 > 
-> * Die Verwendung mehrerer Filter kann die Abfrage verlangsamen, da mehr Tabellen in der Auswertung berücksichtigt werden müssen.
+> * The use of multiple filters can slow down the query, as more tables have to be taken into account in the evaluation.
 > 
 > 
-> * Die Filter werden konjunktiv ausgewertet, d.h., alle Bedingungen müssen erfüllt sein, damit ein Eintrag in das Ergebnis aufgenommen wird.
+> * The filters are evaluated conjunctively, i.e. all conditions must be met for an entry to be included in the result.
 
 Additional endpoints and parameters can be used according to the [API documentation](https://api-test.georoc.eu/api/v1/docs/index.html#/).
-
-
