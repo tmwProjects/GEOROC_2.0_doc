@@ -1,5 +1,6 @@
 # Writing simple API query
 
+
 You should import the relevant modules into your Python document:
 
 ```python

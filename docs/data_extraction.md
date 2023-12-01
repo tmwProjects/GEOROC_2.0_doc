@@ -12,7 +12,6 @@ def extract_sample_ids(filtered_samples):
 print(extract_sample_ids(filtered_samples_combined))
 ```
 
-
 ```Bash
 Output:
 
