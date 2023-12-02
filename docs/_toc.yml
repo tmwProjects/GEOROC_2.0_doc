@@ -11,11 +11,11 @@ chapters:
     - file: writing_query
     - file: api_response
     - file: data_extraction
-- file: future_features
+#- file: future_features
 - file: contribute
 - file: projects
-  sections:
-  - file: example1_notebook
-  - file: example2_notebook
+  #sections:
+  #- file: example1_notebook
+  #- file: example2_notebook
 
 
