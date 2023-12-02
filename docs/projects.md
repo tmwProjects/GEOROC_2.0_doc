@@ -34,7 +34,7 @@ and promotes the broad application of the database for a variety of research and
 
 <img src="https://github.com/digis-georoc/Georoc_jupyter/blob/main/grafics/BINDER_JUPYTER_QR.png?raw=true" style="height:315px" align="center"/> <br><br>
 
-#### or visit our [repository](https://github.com/digis-georoc/Georoc_jupyter/tree/main) directly further information.
+#### or visit our [repository](https://github.com/digis-georoc/Georoc_jupyter/tree/main) directly for further information.
 
 > **Hint**: 
 > Please note that an API key from GEOROC is required to use the API and our notebook.
