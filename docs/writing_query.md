@@ -69,19 +69,19 @@ headers = {
 
 The second part of the code contains the api_query function:
 
-Purpose: This function is designed to send GET requests to various endpoints of the API and process the responses.
+**Purpose**: This function is designed to send GET requests to various endpoints of the API and process the responses.
 
 Parameters:
 
-endpoint: Specifies the specific endpoint of the API to which the request is sent.
+**endpoint**: Specifies the specific endpoint of the API to which the request is sent.
 
-params (optional): Contains additional parameters for the request.
+**params (optional)**: Contains additional parameters for the request.
 
-Processing logic: The function uses the requests library to execute the GET request. It checks the status code of the 
+**Processing logic**: The function uses the requests library to execute the GET request. It checks the status code of the 
 response: If the status code is 200, the response is interpreted as JSON and returned; if the status code is not 200, 
 an error message is issued and None is returned.
 
-The api_query function thus demonstrates an efficient and structured approach to performing and handling API requests in 
+The **api_query** function thus demonstrates an efficient and structured approach to performing and handling API requests in 
 Python. It emphasises the importance of error handling and provides a user-friendly method for interacting with web APIs.
 
 ```python
@@ -108,7 +108,7 @@ API query successful for endpoint:ping
 
 ***
 
-The check_api_connection() function is designed to validate connectivity with an API server. This function initiates a 
+The **check_api_connection()** function is designed to validate connectivity with an API server. This function initiates a 
 call to the ping endpoint of the relevant API and checks the response to confirm the availability of the server.
 
 In the event of a successful connection, the function generates a confirmation message indicating the successful 
@@ -151,26 +151,26 @@ filter criteria, such as geographic location, rock types, publication dates and 
 
 ##### Here is a short overview:
 
-Parameters of the function:
+**Parameters of the function**:
 
 The function accepts a wide range of parameters (e.g. limit, offset, rocktype, agemin, etc.) that allow the user to specify the query. 
 to specify the query. Each parameter corresponds to a possible filter criterion in the API query.
 
 
-Structure of the query:
+**Structure of the query**:
 
 The function creates a query by converting the transferred parameters into a dictionary (filters). In doing so 
 parameters that are not None are taken into account to ensure that only relevant filters are sent to the API. 
 are sent to the API.
 
 
-API call:
+**API call**:
 
 The function then calls the **api_query** function, passes it the endpoint (queries/samples) and the created filters 
 as parameters. This functionality makes it possible to dynamically retrieve data based on the passed filter criteria.
 
 
-Returning the data:
+**Returning the data**:
 
 Finally, the function returns the data returned by the API. This data corresponds to the set 
 filter criteria and can be used for further analyses or processing.
@@ -229,14 +229,14 @@ API query successful for endpoint:queries/samples
 
 #### Using the get_filtered_samples() function
 
-To use the get_filtered_samples() function effectively, follow these steps, which are illustrated using a concrete example. 
+To use the **get_filtered_samples()** function effectively, follow these steps, which are illustrated using a concrete example. 
 illustrated using a concrete example:
 
 1. call the function with specific parameters:
 
-Use limit="1" to limit the number of records returned to one.
+Use **limit="1"** to limit the number of records returned to one.
 Set location1, location2 and location3 to specify geographical locations.
-Use rocktype="PLU" to specify the rock type to be filtered in the query.
+Use **rocktype="PLU"** to specify the rock type to be filtered in the query.
 
 2. expectations of the function:
 
@@ -247,11 +247,11 @@ This includes filtering by specific tectonic zones, geographic locations and roc
 
 After the call you will receive an output as follows:
 
-numItems: Displays the number of records that were actually returned.
+**numItems**: Displays the number of records that were actually returned.
 
-totalCount: Indicates the total number of data records that match the filter criteria.
+**totalCount**: Indicates the total number of data records that match the filter criteria.
 
-data: A list of the filtered data containing specific information about each sample, such as sampleID and geographic 
+**data**: A list of the filtered data containing specific information about each sample, such as sampleID and geographic 
 
 coordinates (latitude and longitude).
 
@@ -307,28 +307,33 @@ OPERATOR**: An operator defines the type of query. Various operators are availab
 
 "**lt**" and "**gt**":
 Only applicable to numerical values.
-Example: agemin=lt:100 (age less than 100)
+
+> **Example**: agemin=lt:100 (age less than 100)
 
 "**eq**":
 Standard operator if no other is specified.
 Can be used for any value type.
-Example: rocktype=eq:Basalt (Rocktype equals Basalt)
+
+> **Example**: rocktype=eq:Basalt (Rocktype equals Basalt)
 
 "**in**":
 For filtering within a list of values.
 The values must be separated by commas.
-Example: location1=in:USA,Canada,Mexico (Location1 in one of the specified regions)
+
+> **Example**: location1=in:USA,Canada,Mexico (Location1 in one of the specified regions)
 
 "**lk**":
 Only for character strings.
 Supports wildcards * (for any number of characters) and ? (for a single character).
-Example: title=lk:Geology* (title begins with "Geology")
+
+> **Example**: title=lk:Geology* (title begins with "Geology")
 
 "**btw**":
 For numeric ranges.
 Takes two values separated by commas.
 If a value is missing, 0 or 9999999 is assumed by default.
-Example: agemin=btw:100,200 (age between 100 and 200)
+
+> **Example**: agemin=btw:100,200 (age between 100 and 200)
 
 
 ##### Example of use
