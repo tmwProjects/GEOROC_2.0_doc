@@ -1,6 +1,28 @@
-# Writing simple API query
+# Writing API query
 
+## Introduction
 
+In our example for accessing the data, we describe the technical implementation via the GEOROC 2.0 API using a total of 
+3 endpoints to obtain geochemical measurement data. Depending on the requirements of your project, you should consult 
+the official [technical documentation of the API](https://api-test.georoc.eu/api/v1/docs/index.html#/) to select and customise the appropriate endpoints for your needs.
+
+This example has been successfully tested under the following system requirements and versions:
+
+```bash
+Python Version: 3.11.6
+
+Operating system:
+  * Ubuntu 22.04.3 LTS 
+  
+IDE: 
+  * PyCharm 2022.2.3 (Community Edition)
+
+Libraries:
+  * requests Version: 2.31.0
+  * json Version: 2.0.9
+```
+
+***
 
 In Python programmes, import instructions are usually at the beginning of the code. They integrate external modules or 
 libraries that provide additional functionalities. These imports have the following meanings:
@@ -22,12 +44,12 @@ import sys
 
 The first part of the code defines basic elements for the API interaction:
 
-API key (api_key): This is a string that is used for authentication with the API. It ensures that only authorised users 
+API key **(api_key)**: This is a string that is used for authentication with the API. It ensures that only authorised users 
 have access to the API.
 
-Base URL (base_url): It defines the basic address of the API. All endpoint calls are formulated relative to this base URL.
+Base URL **(base_url)**: It defines the basic address of the API. All endpoint calls are formulated relative to this base URL.
 
-Header (headers): A dictionary containing the necessary HTTP headers for the requests, including accepting JSON formats 
+Header **(headers)**: A dictionary containing the necessary HTTP headers for the requests, including accepting JSON formats 
 and including the API key.
 
 This initialisation creates the basis for subsequent communication with the API and ensures secure and standardised interaction.
@@ -42,6 +64,8 @@ headers = {
         "DIGIS-API-ACCESSKEY": api_key
 }
 ```
+
+***
 
 The second part of the code contains the api_query function:
 
@@ -63,7 +87,7 @@ Python. It emphasises the importance of error handling and provides a user-frien
 ```python
 def api_query(endpoint, params=None):
     response = requests.get(f"{base_url}{endpoint}",headers=headers, params=params)
-    if response.status_code == 200:
+    if response.status_code == 200:Python Version: 3.11.6
         data = json.loads(response.text)
         print(f"\nAPI query successful for endpoint:{endpoint}")
         print("+---------------------------------------------------------------------+")
@@ -81,6 +105,8 @@ Output:
 API query successful for endpoint:ping
 +---------------------------------------------------------------------+
 ```
+
+***
 
 The check_api_connection() function is designed to validate connectivity with an API server. This function initiates a 
 call to the ping endpoint of the relevant API and checks the response to confirm the availability of the server.
@@ -117,7 +143,9 @@ Connection to API server successful!
 +---------------------------------------------------------------------+
 ```
 
-The get_filtered_samples() function is designed to retrieve filtered data from an API based on a number of parameters. 
+***
+
+The **get_filtered_samples()** function is designed to retrieve filtered data from an API based on a number of parameters. 
 of parameters. It allows specific queries to be sent to the API by defining various filter criteria such as geographic location 
 filter criteria, such as geographic location, rock types, publication dates and more.
 
@@ -138,7 +166,7 @@ are sent to the API.
 
 API call:
 
-The function then calls the api_query function, passes it the endpoint (queries/samples) and the created filters 
+The function then calls the **api_query** function, passes it the endpoint (queries/samples) and the created filters 
 as parameters. This functionality makes it possible to dynamically retrieve data based on the passed filter criteria.
 
 
@@ -186,7 +214,7 @@ def get_filtered_samples(
         if key not in ["endpoint"] and value is not None
     }
 
-    data = api_query(endpoint, params=filters)
+    data = api_query(endpoint, params=filtPython Version: 3.11.6ers)
     return data
 ```
 
@@ -196,6 +224,8 @@ Output:
 API query successful for endpoint:queries/samples
 +---------------------------------------------------------------------+
 ```
+
+***
 
 #### Using the get_filtered_samples() function
 
@@ -262,46 +292,46 @@ Zusammenhang mit den Parametern nutzen können:
 
 **FIELD**: A field is one of the accepted query parameters. This could be any parameter, such as location1, agemin, rocktype etc.
 
-**OPERATOR**: An operator defines the type of query. Various operators are available:
+OPERATOR**: An operator defines the type of query. Various operators are available:
 
-* "lt" (less than, <)
-* "gt" (greater than, >)
-* "eq" (equal to, =)
-* "in" (within a list)
-* "lk" (similar, LIKE in SQL)
-* "btw" (between, BETWEEN in SQL)
+* "**lt**" (less than, <)
+* "**gt**" (greater than, >)
+* "**eq**" (equal to, =)
+* "**in**" (within a list)
+* "**lk**" (similar, LIKE in SQL)
+* "**btw**" (between, BETWEEN in SQL)
 
 **VALUE**: The value against which the field is compared. This can be an unquoted string, an integer or a decimal number.
 
 ##### Operators and their use
 
-"lt" and "gt":
+"**lt**" and "**gt**":
 Only applicable to numerical values.
 Example: agemin=lt:100 (age less than 100)
 
-"eq":
+"**eq**":
 Standard operator if no other is specified.
 Can be used for any value type.
 Example: rocktype=eq:Basalt (Rocktype equals Basalt)
 
-"in":
+"**in**":
 For filtering within a list of values.
 The values must be separated by commas.
 Example: location1=in:USA,Canada,Mexico (Location1 in one of the specified regions)
 
-"lk":
+"**lk**":
 Only for character strings.
 Supports wildcards * (for any number of characters) and ? (for a single character).
 Example: title=lk:Geology* (title begins with "Geology")
 
-"btw":
+"**btw**":
 For numeric ranges.
 Takes two values separated by commas.
 If a value is missing, 0 or 9999999 is assumed by default.
 Example: agemin=btw:100,200 (age between 100 and 200)
 
 
-###### Example of use
+##### Example of use
 
 Suppose you want to find samples that come from a certain region, are of a certain age and correspond to a certain type of rock. 
 age and correspond to a certain type of rock. You could then use the following filters:
@@ -320,5 +350,3 @@ filtered_samples_combined = get_filtered_samples(
 > 
 > 
 > * The filters are evaluated conjunctively, i.e. all conditions must be met for an entry to be included in the result.
-
-Additional endpoints and parameters can be used according to the [API documentation](https://api-test.georoc.eu/api/v1/docs/index.html#/).
