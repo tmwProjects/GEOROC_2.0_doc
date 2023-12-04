@@ -214,7 +214,7 @@ def get_filtered_samples(
         if key not in ["endpoint"] and value is not None
     }
 
-    data = api_query(endpoint, params=filtPython Version: 3.11.6ers)
+    data = api_query(endpoint, params=filters)
     return data
 ```
 

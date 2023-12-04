@@ -1,4 +1,4 @@
-# In- and external projects
+# Projects - API used
 
 The GEOROC 2.0 API offers a wide range of possible applications for internal and external projects. Some examples include:
 
